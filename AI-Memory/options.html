@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Context Boundary Tracker Options</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: #0f1117; color: #e8eefc; margin: 0; padding: 20px; }
+    .wrap { max-width: 980px; margin: 0 auto; }
+    h1 { font-size: 20px; margin: 0 0 16px 0; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .card { background: #10131c; border: 1px solid #2b3242; border-radius: 10px; padding: 16px; }
+    label { display: block; font-size: 12px; opacity: 0.85; margin-bottom: 6px; }
+    input, select, textarea { width: 100%; background: #0c0e14; color: #e8eefc; border: 1px solid #2b3242; border-radius: 8px; padding: 8px; font-size: 13px; }
+    textarea { min-height: 88px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .btns { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    button { background: #1b1f2a; color: #e6ecff; border: 1px solid #2b3242; border-radius: 8px; padding: 8px 10px; font-size: 12px; cursor: pointer; }
+    button:hover { background: #222836; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre-wrap; background: #0a0b10; border: 1px solid #1d2330; border-radius: 8px; padding: 10px; }
+    .small { font-size: 12px; opacity: 0.9; }
+  </style>
+  <script type="module" src="options.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Context Boundary Tracker Options</h1>
+    <div class="grid">
+      <div class="card">
+        <div class="row">
+          <div>
+            <label for="site">Site</label>
+            <select id="site" disabled>
+              <option value="chatgpt.com">chatgpt.com</option>
+            </select>
+          </div>
+          <div>
+            <label for="tokenizer_type">Tokenizer</label>
+            <select id="tokenizer_type">
+              <option value="openai">openai</option>
+            </select>
+          </div>
+          <div>
+            <label for="tokenizer_mode">Mode</label>
+            <select id="tokenizer_mode">
+              <option value="high_fidelity">high_fidelity</option>
+              <option value="heuristic">heuristic</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <div>
+            <label for="context_window">context_window</label>
+            <input id="context_window" type="number" min="1" step="1">
+          </div>
+          <div>
+            <label for="overhead">overhead</label>
+            <input id="overhead" type="number" min="0" step="1">
+          </div>
+          <div>
+            <label for="reply_budget">reply_budget</label>
+            <input id="reply_budget" type="number" min="0" step="1">
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <label for="custom_selectors">Custom selectors (newline-delimited, prioritized)</label>
+          <textarea id="custom_selectors" placeholder="div.message-content"></textarea>
+        </div>
+        <div class="btns">
+          <button id="save">Save</button>
+          <button id="reset">Reset to defaults</button>
+        </div>
+      </div>
+      <div class="card">
+        <label for="test_text">Per-site test input</label>
+        <textarea id="test_text" placeholder="Paste sample text"></textarea>
+        <div class="btns">
+          <button id="test_count">Tokenize</button>
+          <button id="test_messages">Run boundary test</button>
+        </div>
+        <div class="small" style="margin-top:8px">Counts</div>
+        <div id="counts" class="mono"></div>
+        <div class="small" style="margin-top:8px">Boundary test</div>
+        <div id="boundary" class="mono"></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="small">Privacy</div>
+      <div class="mono">No telemetry, no analytics, no external network requests. All processing is client-side.</div>
+    </div>
+  </div>
+</body>
+</html>
+

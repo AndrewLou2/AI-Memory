@@ -1,0 +1,74 @@
+{
+  "manifest_version": 3,
+  "name": "Context Boundary Tracker",
+  "description": "Accurately tracks the context boundary in long chats and shows the 'Start of Context' and 'First Omitted' messages.",
+  "version": "1.0.0",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://www.chatgpt.com/*"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Context Boundary Tracker"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://www.chatgpt.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "worker-tokenizer.js",
+        "tokenizer-openai.js",
+        "heuristics.js",
+        "styles.css"
+      ],
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://www.chatgpt.com/*"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "commands": {
+    "jump_to_start": {
+      "suggested_key": {
+        "default": "Alt+Shift+B"
+      },
+      "description": "Jump to Start of Context"
+    },
+    "jump_to_first_omitted": {
+      "suggested_key": {
+        "default": "Alt+Shift+N"
+      },
+      "description": "Jump to First Omitted"
+    },
+    "toggle_highlights": {
+      "suggested_key": {
+        "default": "Alt+Shift+H"
+      },
+      "description": "Toggle Highlights"
+    }
+  }
+}
+
