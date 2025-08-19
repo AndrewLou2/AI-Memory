@@ -281,7 +281,7 @@ function bindHud() {
   state.shadow.addEventListener("keydown", (e) => {
     if (e.key === "Escape") hideModal();
   });
-  const header = state.hud.querySelector(".cbt-header");
+  const header = state.hud.querySelector(".header");
   const host = state.shadow.host;
   header.addEventListener("mousedown", (e) => {
     state.drag.dragging = true;
@@ -291,10 +291,10 @@ function bindHud() {
   });
   window.addEventListener("mousemove", (e) => {
     if (!state.drag.dragging) return;
-    const y = Math.max(
-      0,
-      Math.min(window.innerHeight - 40, e.clientY - state.drag.offsetY)
-    );
+    const panelHeight = host.getBoundingClientRect().height;
+    const maxTop = Math.max(0, window.innerHeight - panelHeight);
+    const desiredTop = e.clientY - state.drag.offsetY;
+    const y = Math.max(0, Math.min(maxTop, desiredTop));
     host.style.top = y + "px";
     host.style.right = "0px";
     host.style.left = "auto";
