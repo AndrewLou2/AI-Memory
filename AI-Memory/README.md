@@ -1,32 +1,37 @@
-# Context Boundary Tracker
+# AI Memory Tracker
 
-Context Boundary Tracker is a Manifest V3 Chrome Extension that tracks the most recent contiguous set of messages fitting within a model's context window on chatgpt.com. It identifies the Start of Context and First Omitted messages, displays counts, and provides navigation and copy tools. All processing is client-side with no external requests.
+Know exactly what ChatGPT remembers. AI Memory Tracker visualizes the current context window on chatgpt.com, shows the exact “Start of Context” and the first omitted message, and gives quick actions to navigate or copy the relevant text.
 
 ## Features
 
-- High-fidelity and heuristic tokenization via a Web Worker
-- Per-site model profiles with configurable window, overhead, reply budget, tokenizer mode/type, and custom selectors
-- Accurate boundary computation and live updates via MutationObserver
-- HUD with counts, previews, navigation, highlights, and copy actions
-- Keyboard shortcuts: Alt+Shift+B, Alt+Shift+N, Alt+Shift+H
-- Options page with test harness and per-site settings
-- No telemetry or network calls
+- Visual context bar with live token usage
+- “Start of Context” and “First Omitted” markers
+- Highlights for included vs. omitted messages
+- One‑click copy (start or omitted range)
+- Floating, draggable panel with compact UI
+- Keyboard shortcuts: Alt+Shift+B (Jump to Start), Alt+Shift+N (Jump to First Omitted), Alt+Shift+H (Toggle Highlights)
+- Local-only processing, no data collection
 
-## Privacy
+## Install (Developer Mode)
 
-All computation occurs locally in the browser. No telemetry, analytics, or external network requests are made. Clipboard actions are user-initiated and local.
-
-## Installation
-
-1. Open chrome://extensions
-2. Enable Developer Mode
-3. Click Load unpacked and select the extension directory
+1. Open `chrome://extensions`
+2. Enable “Developer mode”
+3. Click “Load unpacked” and select this `AI-Memory` folder
+4. Optional: Pin the toolbar icon
 
 ## Usage
 
-Open a supported chat site. The HUD appears in the bottom-right. Use the buttons or shortcuts to jump to boundary messages, toggle highlights, copy omitted range, or recompute. Adjust settings in the Options page.
+1. Open `https://chatgpt.com`
+2. Use the toolbar button or shortcuts to show the HUD
+3. Drag the panel to reposition; click buttons to jump or copy
 
-## Notes
+## Permissions
 
-- High-fidelity tokenizers are lightweight BPE-based approximations suitable for boundary tracking.
-- If a site's history is virtualized, the extension attempts incremental scroll to load and recompute.
+- `storage`: saves panel position and preferences locally
+- `tabs` (and/or `activeTab`): sends commands from the toolbar/shortcuts to the active tab
+- `clipboardWrite`: enables explicit copy actions
+- Host permissions for `chatgpt.com`: inject the UI and compute context boundaries
+
+## Privacy
+
+All processing is local. No analytics, telemetry, or remote requests. See `PRIVACY.md` for details.

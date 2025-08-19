@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "AI Memory Tracker",
-  "description": "Accurately tracks the context boundary in long chats and shows the 'Start of Context' and 'First Omitted' messages.",
+  "description": "See what ChatGPT still remembers—visualize the context window and jump to the exact start of context.",
   "version": "1.0.0",
   "permissions": [
     "storage",
@@ -14,16 +14,16 @@
     "https://www.chatgpt.com/*"
   ],
   "icons": {
-    "16": "/icons/AI-Memory-16.png",
-    "48": "/icons/AI-Memory-48.png",
-    "128": "/icons/AI-Memory-128.png"
+    "16": "icons/AI-Memory-16.png",
+    "48": "icons/AI-Memory-48.png",
+    "128": "icons/AI-Memory-128.png"
   },
   "action": {
     "default_title": "AI Memory Tracker",
     "default_icon": {
-      "16": "/icons/AI-Memory-16.png",
-      "48": "/icons/AI-Memory-48.png",
-      "128": "/icons/AI-Memory-128.png"
+      "16": "icons/AI-Memory-16.png",
+      "48": "icons/AI-Memory-48.png",
+      "128": "icons/AI-Memory-128.png"
     }
   },
   "background": {
